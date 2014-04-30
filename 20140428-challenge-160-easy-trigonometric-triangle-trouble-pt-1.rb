@@ -36,8 +36,19 @@ def sides_test sides
   end
 end
 
-def solve_for_sides sides
-  
+def solve_for_sides known, a, b, c
+  if known == 2
+    if a == nil
+      
+    elsif b == nil
+
+    elsif c == nil
+      c = Math.sqrt(a ** 2 + b ** 2)
+    end
+  elsif known == 3
+    
+  end
+  return [a, b, c]
 end
 
 # Set triangle variables to blank
@@ -48,7 +59,7 @@ A = nil
 B = nil
 C = nil
 
-puts 'How many details of a triange would you like to give?'
+puts 'How many details of a triangle would you like to give?'
 puts 'Your details must give enough information to describe a valid triangle.'
 details_count = gets.chomp.to_i
 puts 'Provide your details'
@@ -78,10 +89,15 @@ end
 # Put sides into an array
 sides = [a, b, c]
 # Test that we know at least two of the sides
-sides_test_result = sides_test(sides)
+sides_test_return = sides_test(sides)
+test_with_sides = sides_test_return[0]
+known_sides = sides_test_return[1]
 # If result is true then find the angles
-if sides_test_result[0] == true
-  solve_for_sides(sides)
+if test_with_sides == true
+  sides = solve_for_sides(known_sides, a, b, c)
+  a = sides[0]
+  b = sides[1]
+  c = sides[2]
 else
   # Test angles
 end
@@ -93,9 +109,9 @@ adjacent_to_A = b
 opposite_of_B = b
    hypotenuse = c
 
-c = Math.sqrt(a**2 + b ** 2)
+# c = Math.sqrt(a**2 + b ** 2)
 A = Math.asin(a / c) * radian
 B = Math.acos(a / c) * radian
 puts "a = #{a}, b = #{b}, c = #{c}. A = #{A.round(2)}, B = #{B.round(2)}, C = #{C}"
 
-puts sides_test_result
+puts sides_test_return
